@@ -1,0 +1,60 @@
+{
+  "app": {
+    "name": "React Boilerplate",
+    "loading": "Đang tải..."
+  },
+  "nav": {
+    "dashboard": "Bảng điều khiển",
+    "settings": "Cài đặt",
+    "logout": "Đăng xuất"
+  },
+  "auth": {
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "emailPlaceholder": "Nhập email của bạn",
+    "passwordPlaceholder": "Nhập mật khẩu của bạn",
+    "loginButton": "Đăng nhập",
+    "loggingIn": "Đang đăng nhập...",
+    "loginSuccess": "Chào mừng trở lại!",
+    "loginError": "Email hoặc mật khẩu không đúng",
+    "logoutSuccess": "Đăng xuất thành công"
+  },
+  "validation": {
+    "required": "Trường này là bắt buộc",
+    "email": "Vui lòng nhập email hợp lệ",
+    "minLength": "Phải có ít nhất {{min}} ký tự",
+    "maxLength": "Phải có nhiều nhất {{max}} ký tự"
+  },
+  "dashboard": {
+    "title": "Bảng điều khiển",
+    "welcome": "Chào mừng, {{name}}!",
+    "stats": "Thống kê",
+    "recentActivity": "Hoạt động gần đây"
+  },
+  "theme": {
+    "light": "Sáng",
+    "dark": "Tối",
+    "system": "Hệ thống",
+    "toggle": "Chuyển giao diện"
+  },
+  "language": {
+    "en": "English",
+    "vi": "Tiếng Việt",
+    "switch": "Chuyển ngôn ngữ"
+  },
+  "common": {
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "edit": "Sửa",
+    "confirm": "Xác nhận",
+    "back": "Quay lại",
+    "close": "Đóng",
+    "search": "Tìm kiếm",
+    "noData": "Không có dữ liệu",
+    "error": "Đã xảy ra lỗi",
+    "retry": "Thử lại"
+  }
+}

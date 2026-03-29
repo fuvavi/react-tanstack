@@ -1,0 +1,60 @@
+{
+  "app": {
+    "name": "React Boilerplate",
+    "loading": "Loading..."
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "emailPlaceholder": "Enter your email",
+    "passwordPlaceholder": "Enter your password",
+    "loginButton": "Sign In",
+    "loggingIn": "Signing in...",
+    "loginSuccess": "Welcome back!",
+    "loginError": "Invalid email or password",
+    "logoutSuccess": "Logged out successfully"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email",
+    "minLength": "Must be at least {{min}} characters",
+    "maxLength": "Must be at most {{max}} characters"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome, {{name}}!",
+    "stats": "Statistics",
+    "recentActivity": "Recent Activity"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "toggle": "Toggle theme"
+  },
+  "language": {
+    "en": "English",
+    "vi": "Tiếng Việt",
+    "switch": "Switch language"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "confirm": "Confirm",
+    "back": "Back",
+    "close": "Close",
+    "search": "Search",
+    "noData": "No data available",
+    "error": "An error occurred",
+    "retry": "Retry"
+  }
+}

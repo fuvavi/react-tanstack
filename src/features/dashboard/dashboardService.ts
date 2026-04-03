@@ -22,9 +22,7 @@ export const dashboardService = {
   },
 
   getRecentActivity: async (): Promise<ActivityItem[]> => {
-    const { data } = await axiosInstance.get<ApiResponse<ActivityItem[]>>(
-      '/dashboard/activity',
-    )
+    const { data } = await axiosInstance.get<ApiResponse<ActivityItem[]>>('/dashboard/activity')
     return data.data
   },
 }

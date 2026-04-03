@@ -5,7 +5,7 @@ description: Systematic code refactoring based on Martin Fowler's methodology. U
 
 # Code Refactoring Skill
 
-A systematic approach to refactoring code based on Martin Fowler's *Refactoring: Improving the Design of Existing Code* (2nd Edition). This skill emphasizes safe, incremental changes backed by tests.
+A systematic approach to refactoring code based on Martin Fowler's _Refactoring: Improving the Design of Existing Code_ (2nd Edition). This skill emphasizes safe, incremental changes backed by tests.
 
 > "Refactoring is the process of changing a software system in such a way that it does not alter the external behavior of the code yet improves its internal structure." — Martin Fowler
 
@@ -38,11 +38,13 @@ Phase 6: Review & Iteration
 ## Phase 1: Research & Analysis
 
 ### Objectives
+
 - Understand the codebase structure and purpose
 - Identify the scope of refactoring
 - Gather context about business requirements
 
 ### Questions to Ask User
+
 Before starting, clarify:
 
 1. **Scope**: Which files/modules/functions need refactoring?
@@ -52,13 +54,16 @@ Before starting, clarify:
 5. **Test status**: Do tests exist? Are they passing?
 
 ### Actions
+
 - [ ] Read and understand the target code
 - [ ] Identify dependencies and integrations
 - [ ] Document current architecture
 - [ ] Note any existing technical debt markers (TODOs, FIXMEs)
 
 ### Output
+
 Present findings to user:
+
 - Code structure summary
 - Identified problem areas
 - Initial recommendations
@@ -69,6 +74,7 @@ Present findings to user:
 ## Phase 2: Test Coverage Assessment
 
 ### Why Tests Matter
+
 > "Refactoring without tests is like driving without a seatbelt." — Martin Fowler
 
 Tests are the **key enabler** of safe refactoring. Without them, you risk introducing bugs.
@@ -76,12 +82,14 @@ Tests are the **key enabler** of safe refactoring. Without them, you risk introd
 ### Assessment Steps
 
 1. **Check for existing tests**
+
    ```bash
    # Look for test files
    find . -name "*test*" -o -name "*spec*" | head -20
    ```
 
 2. **Run existing tests**
+
    ```bash
    # JavaScript/TypeScript
    npm test
@@ -94,6 +102,7 @@ Tests are the **key enabler** of safe refactoring. Without them, you risk introd
    ```
 
 3. **Check coverage (if available)**
+
    ```bash
    # JavaScript
    npm run test:coverage
@@ -105,26 +114,31 @@ Tests are the **key enabler** of safe refactoring. Without them, you risk introd
 ### Decision Point: Ask User
 
 **If tests exist and pass:**
+
 - Proceed to Phase 3
 
 **If tests are missing or incomplete:**
 Present options:
+
 1. Write tests first (recommended)
 2. Add tests incrementally during refactoring
 3. Proceed without tests (risky - requires user acknowledgment)
 
 **If tests are failing:**
+
 - STOP. Fix failing tests before refactoring
 - Ask user: Should we fix tests first?
 
 ### Test Writing Guidelines (if needed)
 
 For each function being refactored, ensure tests cover:
+
 - Happy path (normal operation)
 - Edge cases (empty inputs, null, boundaries)
 - Error scenarios (invalid inputs, exceptions)
 
 Use the "red-green-refactor" cycle:
+
 1. Write failing test (red)
 2. Make it pass (green)
 3. Refactor
@@ -134,6 +148,7 @@ Use the "red-green-refactor" cycle:
 ## Phase 3: Code Smell Identification
 
 ### What Are Code Smells?
+
 Symptoms of deeper problems in code. They're not bugs, but indicators that the code could be improved.
 
 ### Common Code Smells to Check
@@ -142,22 +157,23 @@ See [references/code-smells.md](references/code-smells.md) for the complete cata
 
 #### Quick Reference
 
-| Smell | Signs | Impact |
-|-------|-------|--------|
-| **Long Method** | Methods > 30-50 lines | Hard to understand, test, maintain |
-| **Duplicated Code** | Same logic in multiple places | Bug fixes needed in multiple places |
-| **Large Class** | Class with too many responsibilities | Violates Single Responsibility |
-| **Feature Envy** | Method uses another class's data more | Poor encapsulation |
-| **Primitive Obsession** | Overuse of primitives instead of objects | Missing domain concepts |
-| **Long Parameter List** | Methods with 4+ parameters | Hard to call correctly |
-| **Data Clumps** | Same data items appearing together | Missing abstraction |
-| **Switch Statements** | Complex switch/if-else chains | Hard to extend |
-| **Speculative Generality** | Code "just in case" | Unnecessary complexity |
-| **Dead Code** | Unused code | Confusion, maintenance burden |
+| Smell                      | Signs                                    | Impact                              |
+| -------------------------- | ---------------------------------------- | ----------------------------------- |
+| **Long Method**            | Methods > 30-50 lines                    | Hard to understand, test, maintain  |
+| **Duplicated Code**        | Same logic in multiple places            | Bug fixes needed in multiple places |
+| **Large Class**            | Class with too many responsibilities     | Violates Single Responsibility      |
+| **Feature Envy**           | Method uses another class's data more    | Poor encapsulation                  |
+| **Primitive Obsession**    | Overuse of primitives instead of objects | Missing domain concepts             |
+| **Long Parameter List**    | Methods with 4+ parameters               | Hard to call correctly              |
+| **Data Clumps**            | Same data items appearing together       | Missing abstraction                 |
+| **Switch Statements**      | Complex switch/if-else chains            | Hard to extend                      |
+| **Speculative Generality** | Code "just in case"                      | Unnecessary complexity              |
+| **Dead Code**              | Unused code                              | Confusion, maintenance burden       |
 
 ### Analysis Steps
 
 1. **Automated Analysis** (if scripts available)
+
    ```bash
    python scripts/detect-smells.py <file>
    ```
@@ -176,6 +192,7 @@ See [references/code-smells.md](references/code-smells.md) for the complete cata
 ### Output: Smell Report
 
 Present to user:
+
 - List of identified smells with locations
 - Severity assessment for each
 - Recommended priority order
@@ -193,24 +210,25 @@ See [references/refactoring-catalog.md](references/refactoring-catalog.md) for t
 
 #### Smell-to-Refactoring Mapping
 
-| Code Smell | Recommended Refactoring(s) |
-|------------|---------------------------|
-| Long Method | Extract Method, Replace Temp with Query |
-| Duplicated Code | Extract Method, Pull Up Method, Form Template Method |
-| Large Class | Extract Class, Extract Subclass |
-| Feature Envy | Move Method, Move Field |
-| Primitive Obsession | Replace Primitive with Object, Replace Type Code with Class |
-| Long Parameter List | Introduce Parameter Object, Preserve Whole Object |
-| Data Clumps | Extract Class, Introduce Parameter Object |
-| Switch Statements | Replace Conditional with Polymorphism |
-| Speculative Generality | Collapse Hierarchy, Inline Class, Remove Dead Code |
-| Dead Code | Remove Dead Code |
+| Code Smell             | Recommended Refactoring(s)                                  |
+| ---------------------- | ----------------------------------------------------------- |
+| Long Method            | Extract Method, Replace Temp with Query                     |
+| Duplicated Code        | Extract Method, Pull Up Method, Form Template Method        |
+| Large Class            | Extract Class, Extract Subclass                             |
+| Feature Envy           | Move Method, Move Field                                     |
+| Primitive Obsession    | Replace Primitive with Object, Replace Type Code with Class |
+| Long Parameter List    | Introduce Parameter Object, Preserve Whole Object           |
+| Data Clumps            | Extract Class, Introduce Parameter Object                   |
+| Switch Statements      | Replace Conditional with Polymorphism                       |
+| Speculative Generality | Collapse Hierarchy, Inline Class, Remove Dead Code          |
+| Dead Code              | Remove Dead Code                                            |
 
 ### Plan Structure
 
 Use the template at [templates/refactoring-plan.md](templates/refactoring-plan.md).
 
 For each refactoring:
+
 1. **Target**: What code will change
 2. **Smell**: What problem it addresses
 3. **Refactoring**: Which technique to apply
@@ -223,16 +241,19 @@ For each refactoring:
 **CRITICAL**: Introduce refactoring gradually in phases.
 
 **Phase A: Quick Wins** (Low risk, high value)
+
 - Rename variables for clarity
 - Extract obvious duplicate code
 - Remove dead code
 
 **Phase B: Structural Improvements** (Medium risk)
+
 - Extract methods from long functions
 - Introduce parameter objects
 - Move methods to appropriate classes
 
 **Phase C: Architectural Changes** (Higher risk)
+
 - Replace conditionals with polymorphism
 - Extract classes
 - Introduce design patterns
@@ -240,6 +261,7 @@ For each refactoring:
 ### Decision Point: Present Plan to User
 
 Before implementation:
+
 - Show complete refactoring plan
 - Explain each phase and its risks
 - Get explicit approval for each phase
@@ -250,6 +272,7 @@ Before implementation:
 ## Phase 5: Incremental Implementation
 
 ### The Golden Rule
+
 > "Change → Test → Green? → Commit → Next step"
 
 ### Implementation Rhythm
@@ -281,11 +304,13 @@ For each refactoring step:
 ### Commit Strategy
 
 Each commit should be:
+
 - **Atomic**: One logical change
 - **Reversible**: Easy to revert
 - **Descriptive**: Clear commit message
 
 Example commit messages:
+
 ```
 refactor: Extract calculateTotal() from processOrder()
 refactor: Rename 'x' to 'customerCount' for clarity
@@ -295,6 +320,7 @@ refactor: Remove unused validateOldFormat() method
 ### Progress Reporting
 
 After each sub-phase, report to user:
+
 - Changes made
 - Tests still passing?
 - Any issues encountered
@@ -316,11 +342,13 @@ After each sub-phase, report to user:
 ### Metrics Comparison
 
 Run complexity analysis before and after:
+
 ```bash
 python scripts/analyze-complexity.py <file>
 ```
 
 Present improvements:
+
 - Lines of code change
 - Cyclomatic complexity change
 - Maintainability index change
@@ -328,6 +356,7 @@ Present improvements:
 ### User Review
 
 Present final results:
+
 - Summary of all changes
 - Before/after code comparison
 - Metrics improvements
@@ -337,6 +366,7 @@ Present final results:
 ### Next Steps
 
 Discuss with user:
+
 - Additional smells to address?
 - Schedule follow-up refactoring?
 - Apply similar changes elsewhere?
@@ -348,6 +378,7 @@ Discuss with user:
 ### When to STOP and Ask
 
 Always pause and consult user when:
+
 - Unsure about business logic
 - Change might affect external APIs
 - Test coverage is inadequate
@@ -378,6 +409,7 @@ Always pause and consult user when:
 ### Scenario: Long Method with Duplication
 
 **Before:**
+
 ```javascript
 function processOrder(order) {
   // 150 lines of code with:
@@ -399,12 +431,13 @@ function processOrder(order) {
 8. **Review** - processOrder() now orchestrates 3 clear functions
 
 **After:**
+
 ```javascript
 function processOrder(order) {
-  validateOrder(order);
-  const total = calculateOrderTotal(order);
-  notifyCustomer(order, total);
-  return { order, total };
+  validateOrder(order)
+  const total = calculateOrderTotal(order)
+  notifyCustomer(order, total)
+  return { order, total }
 }
 ```
 

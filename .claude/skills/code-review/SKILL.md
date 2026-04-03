@@ -40,11 +40,13 @@ This skill provides comprehensive code review capabilities focusing on:
 For each piece of code reviewed, provide:
 
 ### Summary
+
 - Overall quality assessment (1-5)
 - Key findings count
 - Recommended priority areas
 
 ### Critical Issues (if any)
+
 - **Issue**: Clear description
 - **Location**: File and line number
 - **Impact**: Why this matters
@@ -54,15 +56,19 @@ For each piece of code reviewed, provide:
 ### Findings by Category
 
 #### Security (if issues found)
+
 List security vulnerabilities with examples
 
 #### Performance (if issues found)
+
 List performance problems with complexity analysis
 
 #### Quality (if issues found)
+
 List code quality issues with refactoring suggestions
 
 #### Maintainability (if issues found)
+
 List maintainability problems with improvements
 
 ## Version History

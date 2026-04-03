@@ -1,6 +1,6 @@
 # Refactoring Catalog
 
-A curated catalog of refactoring techniques from Martin Fowler's *Refactoring* (2nd Edition). Each refactoring includes motivation, step-by-step mechanics, and examples.
+A curated catalog of refactoring techniques from Martin Fowler's _Refactoring_ (2nd Edition). Each refactoring includes motivation, step-by-step mechanics, and examples.
 
 > "A refactoring is defined by its mechanics—the precise sequence of steps that you follow to carry out the change." — Martin Fowler
 
@@ -26,6 +26,7 @@ A curated catalog of refactoring techniques from Martin Fowler's *Refactoring* (
 **Motivation**: Turn a code fragment into a method whose name explains the purpose.
 
 **Mechanics**:
+
 1. Create a new method named for what it does (not how)
 2. Copy the code fragment into the new method
 3. Scan for local variables used in the fragment
@@ -35,46 +36,48 @@ A curated catalog of refactoring techniques from Martin Fowler's *Refactoring* (
 7. Test
 
 **Before**:
+
 ```javascript
 function printOwing(invoice) {
-  let outstanding = 0;
+  let outstanding = 0
 
-  console.log("***********************");
-  console.log("**** Customer Owes ****");
-  console.log("***********************");
+  console.log('***********************')
+  console.log('**** Customer Owes ****')
+  console.log('***********************')
 
   // Calculate outstanding
   for (const order of invoice.orders) {
-    outstanding += order.amount;
+    outstanding += order.amount
   }
 
   // Print details
-  console.log(`name: ${invoice.customer}`);
-  console.log(`amount: ${outstanding}`);
+  console.log(`name: ${invoice.customer}`)
+  console.log(`amount: ${outstanding}`)
 }
 ```
 
 **After**:
+
 ```javascript
 function printOwing(invoice) {
-  printBanner();
-  const outstanding = calculateOutstanding(invoice);
-  printDetails(invoice, outstanding);
+  printBanner()
+  const outstanding = calculateOutstanding(invoice)
+  printDetails(invoice, outstanding)
 }
 
 function printBanner() {
-  console.log("***********************");
-  console.log("**** Customer Owes ****");
-  console.log("***********************");
+  console.log('***********************')
+  console.log('**** Customer Owes ****')
+  console.log('***********************')
 }
 
 function calculateOutstanding(invoice) {
-  return invoice.orders.reduce((sum, order) => sum + order.amount, 0);
+  return invoice.orders.reduce((sum, order) => sum + order.amount, 0)
 }
 
 function printDetails(invoice, outstanding) {
-  console.log(`name: ${invoice.customer}`);
-  console.log(`amount: ${outstanding}`);
+  console.log(`name: ${invoice.customer}`)
+  console.log(`amount: ${outstanding}`)
 }
 ```
 
@@ -87,6 +90,7 @@ function printDetails(invoice, outstanding) {
 **Motivation**: Remove needless indirection when the method doesn't add value.
 
 **Mechanics**:
+
 1. Check that the method isn't polymorphic
 2. Find all calls to the method
 3. Replace each call with the method body
@@ -94,20 +98,22 @@ function printDetails(invoice, outstanding) {
 5. Remove the method definition
 
 **Before**:
+
 ```javascript
 function getRating(driver) {
-  return moreThanFiveLateDeliveries(driver) ? 2 : 1;
+  return moreThanFiveLateDeliveries(driver) ? 2 : 1
 }
 
 function moreThanFiveLateDeliveries(driver) {
-  return driver.numberOfLateDeliveries > 5;
+  return driver.numberOfLateDeliveries > 5
 }
 ```
 
 **After**:
+
 ```javascript
 function getRating(driver) {
-  return driver.numberOfLateDeliveries > 5 ? 2 : 1;
+  return driver.numberOfLateDeliveries > 5 ? 2 : 1
 }
 ```
 
@@ -120,6 +126,7 @@ function getRating(driver) {
 **Motivation**: Give a name to a piece of a complex expression.
 
 **Mechanics**:
+
 1. Ensure the expression has no side effects
 2. Declare an immutable variable
 3. Set it to the result of the expression (or part)
@@ -127,18 +134,22 @@ function getRating(driver) {
 5. Test
 
 **Before**:
+
 ```javascript
-return order.quantity * order.itemPrice -
+return (
+  order.quantity * order.itemPrice -
   Math.max(0, order.quantity - 500) * order.itemPrice * 0.05 +
-  Math.min(order.quantity * order.itemPrice * 0.1, 100);
+  Math.min(order.quantity * order.itemPrice * 0.1, 100)
+)
 ```
 
 **After**:
+
 ```javascript
-const basePrice = order.quantity * order.itemPrice;
-const quantityDiscount = Math.max(0, order.quantity - 500) * order.itemPrice * 0.05;
-const shipping = Math.min(basePrice * 0.1, 100);
-return basePrice - quantityDiscount + shipping;
+const basePrice = order.quantity * order.itemPrice
+const quantityDiscount = Math.max(0, order.quantity - 500) * order.itemPrice * 0.05
+const shipping = Math.min(basePrice * 0.1, 100)
+return basePrice - quantityDiscount + shipping
 ```
 
 ---
@@ -150,6 +161,7 @@ return basePrice - quantityDiscount + shipping;
 **Motivation**: Remove unnecessary indirection.
 
 **Mechanics**:
+
 1. Check that the right-hand side has no side effects
 2. If variable isn't immutable, make it so and test
 3. Find the first reference and replace with the expression
@@ -167,24 +179,26 @@ return basePrice - quantityDiscount + shipping;
 **Motivation**: Good names are crucial for clean code.
 
 **Mechanics**:
+
 1. If variable is widely used, consider encapsulating
 2. Find all references
 3. Change each reference
 4. Test
 
 **Tips**:
+
 - Use intention-revealing names
 - Avoid abbreviations
 - Use domain terminology
 
 ```javascript
 // Bad
-const d = 30;
-const x = users.filter(u => u.a);
+const d = 30
+const x = users.filter((u) => u.a)
 
 // Good
-const daysSinceLastLogin = 30;
-const activeUsers = users.filter(user => user.isActive);
+const daysSinceLastLogin = 30
+const activeUsers = users.filter((user) => user.isActive)
 ```
 
 ---
@@ -196,12 +210,14 @@ const activeUsers = users.filter(user => user.isActive);
 **Motivation**: Good function names make code self-documenting.
 
 **Mechanics (Simple)**:
+
 1. Remove parameters not needed
 2. Change the name
 3. Add parameters needed
 4. Test
 
 **Mechanics (Migration - for complex changes)**:
+
 1. If removing parameter, make sure it's not used
 2. Create new function with desired declaration
 3. Have old function call new function
@@ -211,16 +227,18 @@ const activeUsers = users.filter(user => user.isActive);
 7. Remove old function
 
 **Before**:
+
 ```javascript
 function circum(radius) {
-  return 2 * Math.PI * radius;
+  return 2 * Math.PI * radius
 }
 ```
 
 **After**:
+
 ```javascript
 function circumference(radius) {
-  return 2 * Math.PI * radius;
+  return 2 * Math.PI * radius
 }
 ```
 
@@ -233,6 +251,7 @@ function circumference(radius) {
 **Motivation**: Provide a clear access point for data manipulation.
 
 **Mechanics**:
+
 1. Create getter and setter functions
 2. Find all references
 3. Replace reads with getter
@@ -241,21 +260,27 @@ function circumference(radius) {
 6. Restrict visibility of the variable
 
 **Before**:
+
 ```javascript
-let defaultOwner = { firstName: "Martin", lastName: "Fowler" };
+let defaultOwner = { firstName: 'Martin', lastName: 'Fowler' }
 
 // Used in many places
-spaceship.owner = defaultOwner;
+spaceship.owner = defaultOwner
 ```
 
 **After**:
+
 ```javascript
-let defaultOwnerData = { firstName: "Martin", lastName: "Fowler" };
+let defaultOwnerData = { firstName: 'Martin', lastName: 'Fowler' }
 
-function defaultOwner() { return defaultOwnerData; }
-function setDefaultOwner(arg) { defaultOwnerData = arg; }
+function defaultOwner() {
+  return defaultOwnerData
+}
+function setDefaultOwner(arg) {
+  defaultOwnerData = arg
+}
 
-spaceship.owner = defaultOwner();
+spaceship.owner = defaultOwner()
 ```
 
 ---
@@ -267,6 +292,7 @@ spaceship.owner = defaultOwner();
 **Motivation**: Group data that naturally belongs together.
 
 **Mechanics**:
+
 1. Create a new class/structure for the grouped parameters
 2. Test
 3. Use Change Function Declaration to add the new object
@@ -275,6 +301,7 @@ spaceship.owner = defaultOwner();
 6. Test after each
 
 **Before**:
+
 ```javascript
 function amountInvoiced(startDate, endDate) { ... }
 function amountReceived(startDate, endDate) { ... }
@@ -282,6 +309,7 @@ function amountOverdue(startDate, endDate) { ... }
 ```
 
 **After**:
+
 ```javascript
 class DateRange {
   constructor(start, end) {
@@ -304,12 +332,14 @@ function amountOverdue(dateRange) { ... }
 **Motivation**: Group functions with the data they operate on.
 
 **Mechanics**:
+
 1. Apply Encapsulate Record to the common data
 2. Move each function into the class
 3. Test after each move
 4. Replace data arguments with uses of class fields
 
 **Before**:
+
 ```javascript
 function base(reading) { ... }
 function taxableCharge(reading) { ... }
@@ -317,6 +347,7 @@ function calculateBaseCharge(reading) { ... }
 ```
 
 **After**:
+
 ```javascript
 class Reading {
   constructor(data) { this._data = data; }
@@ -336,6 +367,7 @@ class Reading {
 **Motivation**: Separate code into distinct phases with clear boundaries.
 
 **Mechanics**:
+
 1. Create a second function for the second phase
 2. Test
 3. Introduce an intermediate data structure between phases
@@ -344,37 +376,43 @@ class Reading {
 6. Test
 
 **Before**:
+
 ```javascript
 function priceOrder(product, quantity, shippingMethod) {
-  const basePrice = product.basePrice * quantity;
-  const discount = Math.max(quantity - product.discountThreshold, 0)
-    * product.basePrice * product.discountRate;
-  const shippingPerCase = (basePrice > shippingMethod.discountThreshold)
-    ? shippingMethod.discountedFee : shippingMethod.feePerCase;
-  const shippingCost = quantity * shippingPerCase;
-  return basePrice - discount + shippingCost;
+  const basePrice = product.basePrice * quantity
+  const discount =
+    Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate
+  const shippingPerCase =
+    basePrice > shippingMethod.discountThreshold
+      ? shippingMethod.discountedFee
+      : shippingMethod.feePerCase
+  const shippingCost = quantity * shippingPerCase
+  return basePrice - discount + shippingCost
 }
 ```
 
 **After**:
+
 ```javascript
 function priceOrder(product, quantity, shippingMethod) {
-  const priceData = calculatePricingData(product, quantity);
-  return applyShipping(priceData, shippingMethod);
+  const priceData = calculatePricingData(product, quantity)
+  return applyShipping(priceData, shippingMethod)
 }
 
 function calculatePricingData(product, quantity) {
-  const basePrice = product.basePrice * quantity;
-  const discount = Math.max(quantity - product.discountThreshold, 0)
-    * product.basePrice * product.discountRate;
-  return { basePrice, quantity, discount };
+  const basePrice = product.basePrice * quantity
+  const discount =
+    Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate
+  return { basePrice, quantity, discount }
 }
 
 function applyShipping(priceData, shippingMethod) {
-  const shippingPerCase = (priceData.basePrice > shippingMethod.discountThreshold)
-    ? shippingMethod.discountedFee : shippingMethod.feePerCase;
-  const shippingCost = priceData.quantity * shippingPerCase;
-  return priceData.basePrice - priceData.discount + shippingCost;
+  const shippingPerCase =
+    priceData.basePrice > shippingMethod.discountThreshold
+      ? shippingMethod.discountedFee
+      : shippingMethod.feePerCase
+  const shippingCost = priceData.quantity * shippingPerCase
+  return priceData.basePrice - priceData.discount + shippingCost
 }
 ```
 
@@ -389,6 +427,7 @@ function applyShipping(priceData, shippingMethod) {
 **Motivation**: Put functions with the data they use most.
 
 **Mechanics**:
+
 1. Examine all program elements used by method in its class
 2. Check if method is polymorphic
 3. Copy method to target class
@@ -406,6 +445,7 @@ function applyShipping(priceData, shippingMethod) {
 **Motivation**: Keep data with the functions that use it.
 
 **Mechanics**:
+
 1. Encapsulate the field if not already
 2. Test
 3. Create field in target
@@ -422,6 +462,7 @@ function applyShipping(priceData, shippingMethod) {
 **Motivation**: Remove duplication by moving repeated code into the function.
 
 **Mechanics**:
+
 1. Extract the repeated code into a function if not already
 2. Move statements into that function
 3. Test
@@ -436,6 +477,7 @@ function applyShipping(priceData, shippingMethod) {
 **Motivation**: When behavior needs to differ, move it out of the function.
 
 **Mechanics**:
+
 1. Use Extract Method on the code to move
 2. Use Inline Method on the original function
 3. Remove the now-inlined call
@@ -453,6 +495,7 @@ function applyShipping(priceData, shippingMethod) {
 **Motivation**: Encapsulate data with its behavior.
 
 **Mechanics**:
+
 1. Apply Encapsulate Variable
 2. Create a simple value class
 3. Change the setter to create a new instance
@@ -461,6 +504,7 @@ function applyShipping(priceData, shippingMethod) {
 6. Add richer behavior to the new class
 
 **Before**:
+
 ```javascript
 class Order {
   constructor(data) {
@@ -473,6 +517,7 @@ if (order.priority === "high" || order.priority === "rush") { ... }
 ```
 
 **After**:
+
 ```javascript
 class Priority {
   constructor(value) {
@@ -503,6 +548,7 @@ if (order.priority.higherThan(new Priority("normal"))) { ... }
 **Motivation**: Make the code clearer by extracting the expression into a function.
 
 **Mechanics**:
+
 1. Check that the variable is assigned only once
 2. Extract the assignment's right-hand side into a method
 3. Replace references to the temp with the method call
@@ -510,16 +556,18 @@ if (order.priority.higherThan(new Priority("normal"))) { ... }
 5. Remove the temp declaration and assignment
 
 **Before**:
+
 ```javascript
-const basePrice = this._quantity * this._itemPrice;
+const basePrice = this._quantity * this._itemPrice
 if (basePrice > 1000) {
-  return basePrice * 0.95;
+  return basePrice * 0.95
 } else {
-  return basePrice * 0.98;
+  return basePrice * 0.98
 }
 ```
 
 **After**:
+
 ```javascript
 get basePrice() {
   return this._quantity * this._itemPrice;
@@ -544,37 +592,40 @@ if (this.basePrice > 1000) {
 **Motivation**: Make the intention clear by extracting conditions and actions.
 
 **Mechanics**:
+
 1. Apply Extract Method on the condition
 2. Apply Extract Method on the then-branch
 3. Apply Extract Method on the else-branch (if present)
 
 **Before**:
+
 ```javascript
 if (!aDate.isBefore(plan.summerStart) && !aDate.isAfter(plan.summerEnd)) {
-  charge = quantity * plan.summerRate;
+  charge = quantity * plan.summerRate
 } else {
-  charge = quantity * plan.regularRate + plan.regularServiceCharge;
+  charge = quantity * plan.regularRate + plan.regularServiceCharge
 }
 ```
 
 **After**:
+
 ```javascript
 if (isSummer(aDate, plan)) {
-  charge = summerCharge(quantity, plan);
+  charge = summerCharge(quantity, plan)
 } else {
-  charge = regularCharge(quantity, plan);
+  charge = regularCharge(quantity, plan)
 }
 
 function isSummer(date, plan) {
-  return !date.isBefore(plan.summerStart) && !date.isAfter(plan.summerEnd);
+  return !date.isBefore(plan.summerStart) && !date.isAfter(plan.summerEnd)
 }
 
 function summerCharge(quantity, plan) {
-  return quantity * plan.summerRate;
+  return quantity * plan.summerRate
 }
 
 function regularCharge(quantity, plan) {
-  return quantity * plan.regularRate + plan.regularServiceCharge;
+  return quantity * plan.regularRate + plan.regularServiceCharge
 }
 ```
 
@@ -587,25 +638,26 @@ function regularCharge(quantity, plan) {
 **Motivation**: Make it clear that conditions are a single check.
 
 **Mechanics**:
+
 1. Verify no side effects in conditions
 2. Combine conditions using `and` or `or`
 3. Consider Extract Method on the combined condition
 
 **Before**:
+
 ```javascript
-if (employee.seniority < 2) return 0;
-if (employee.monthsDisabled > 12) return 0;
-if (employee.isPartTime) return 0;
+if (employee.seniority < 2) return 0
+if (employee.monthsDisabled > 12) return 0
+if (employee.isPartTime) return 0
 ```
 
 **After**:
+
 ```javascript
-if (isNotEligibleForDisability(employee)) return 0;
+if (isNotEligibleForDisability(employee)) return 0
 
 function isNotEligibleForDisability(employee) {
-  return employee.seniority < 2 ||
-         employee.monthsDisabled > 12 ||
-         employee.isPartTime;
+  return employee.seniority < 2 || employee.monthsDisabled > 12 || employee.isPartTime
 }
 ```
 
@@ -618,33 +670,36 @@ function isNotEligibleForDisability(employee) {
 **Motivation**: Use guard clauses for special cases, keeping normal flow clear.
 
 **Mechanics**:
+
 1. Find the special case conditions
 2. Replace them with guard clauses that return early
 3. Test after each change
 
 **Before**:
+
 ```javascript
 function payAmount(employee) {
-  let result;
+  let result
   if (employee.isSeparated) {
-    result = { amount: 0, reasonCode: "SEP" };
+    result = { amount: 0, reasonCode: 'SEP' }
   } else {
     if (employee.isRetired) {
-      result = { amount: 0, reasonCode: "RET" };
+      result = { amount: 0, reasonCode: 'RET' }
     } else {
-      result = calculateNormalPay(employee);
+      result = calculateNormalPay(employee)
     }
   }
-  return result;
+  return result
 }
 ```
 
 **After**:
+
 ```javascript
 function payAmount(employee) {
-  if (employee.isSeparated) return { amount: 0, reasonCode: "SEP" };
-  if (employee.isRetired) return { amount: 0, reasonCode: "RET" };
-  return calculateNormalPay(employee);
+  if (employee.isSeparated) return { amount: 0, reasonCode: 'SEP' }
+  if (employee.isRetired) return { amount: 0, reasonCode: 'RET' }
+  return calculateNormalPay(employee)
 }
 ```
 
@@ -657,6 +712,7 @@ function payAmount(employee) {
 **Motivation**: Let objects handle their own behavior.
 
 **Mechanics**:
+
 1. Create class hierarchy (if not exists)
 2. Use Factory Function for object creation
 3. Move conditional logic into superclass method
@@ -664,53 +720,63 @@ function payAmount(employee) {
 5. Remove original conditional
 
 **Before**:
+
 ```javascript
 function plumages(birds) {
-  return birds.map(b => plumage(b));
+  return birds.map((b) => plumage(b))
 }
 
 function plumage(bird) {
   switch (bird.type) {
     case 'EuropeanSwallow':
-      return "average";
+      return 'average'
     case 'AfricanSwallow':
-      return (bird.numberOfCoconuts > 2) ? "tired" : "average";
+      return bird.numberOfCoconuts > 2 ? 'tired' : 'average'
     case 'NorwegianBlueParrot':
-      return (bird.voltage > 100) ? "scorched" : "beautiful";
+      return bird.voltage > 100 ? 'scorched' : 'beautiful'
     default:
-      return "unknown";
+      return 'unknown'
   }
 }
 ```
 
 **After**:
+
 ```javascript
 class Bird {
-  get plumage() { return "unknown"; }
+  get plumage() {
+    return 'unknown'
+  }
 }
 
 class EuropeanSwallow extends Bird {
-  get plumage() { return "average"; }
+  get plumage() {
+    return 'average'
+  }
 }
 
 class AfricanSwallow extends Bird {
   get plumage() {
-    return (this.numberOfCoconuts > 2) ? "tired" : "average";
+    return this.numberOfCoconuts > 2 ? 'tired' : 'average'
   }
 }
 
 class NorwegianBlueParrot extends Bird {
   get plumage() {
-    return (this.voltage > 100) ? "scorched" : "beautiful";
+    return this.voltage > 100 ? 'scorched' : 'beautiful'
   }
 }
 
 function createBird(data) {
   switch (data.type) {
-    case 'EuropeanSwallow': return new EuropeanSwallow(data);
-    case 'AfricanSwallow': return new AfricanSwallow(data);
-    case 'NorwegianBlueParrot': return new NorwegianBlueParrot(data);
-    default: return new Bird(data);
+    case 'EuropeanSwallow':
+      return new EuropeanSwallow(data)
+    case 'AfricanSwallow':
+      return new AfricanSwallow(data)
+    case 'NorwegianBlueParrot':
+      return new NorwegianBlueParrot(data)
+    default:
+      return new Bird(data)
   }
 }
 ```
@@ -724,6 +790,7 @@ function createBird(data) {
 **Motivation**: Return a special object that handles the special case.
 
 **Mechanics**:
+
 1. Create special case class with expected interface
 2. Add isSpecialCase check
 3. Introduce factory method
@@ -731,32 +798,36 @@ function createBird(data) {
 5. Test
 
 **Before**:
+
 ```javascript
-const customer = site.customer;
+const customer = site.customer
 // ... many places checking
-if (customer === "unknown") {
-  customerName = "occupant";
+if (customer === 'unknown') {
+  customerName = 'occupant'
 } else {
-  customerName = customer.name;
+  customerName = customer.name
 }
 ```
 
 **After**:
+
 ```javascript
 class UnknownCustomer {
-  get name() { return "occupant"; }
-  get billingPlan() { return registry.defaultPlan; }
+  get name() {
+    return 'occupant'
+  }
+  get billingPlan() {
+    return registry.defaultPlan
+  }
 }
 
 // Factory method
 function customer(site) {
-  return site.customer === "unknown"
-    ? new UnknownCustomer()
-    : site.customer;
+  return site.customer === 'unknown' ? new UnknownCustomer() : site.customer
 }
 
 // Usage - no null checks needed
-const customerName = customer.name;
+const customerName = customer.name
 ```
 
 ---
@@ -770,6 +841,7 @@ const customerName = customer.name;
 **Motivation**: Make it clear which operations have side effects.
 
 **Mechanics**:
+
 1. Create a new query function
 2. Copy original function's return logic
 3. Modify original to return void
@@ -777,34 +849,36 @@ const customerName = customer.name;
 5. Test
 
 **Before**:
+
 ```javascript
 function alertForMiscreant(people) {
   for (const p of people) {
-    if (p === "Don") {
-      setOffAlarms();
-      return "Don";
+    if (p === 'Don') {
+      setOffAlarms()
+      return 'Don'
     }
-    if (p === "John") {
-      setOffAlarms();
-      return "John";
+    if (p === 'John') {
+      setOffAlarms()
+      return 'John'
     }
   }
-  return "";
+  return ''
 }
 ```
 
 **After**:
+
 ```javascript
 function findMiscreant(people) {
   for (const p of people) {
-    if (p === "Don") return "Don";
-    if (p === "John") return "John";
+    if (p === 'Don') return 'Don'
+    if (p === 'John') return 'John'
   }
-  return "";
+  return ''
 }
 
 function alertForMiscreant(people) {
-  if (findMiscreant(people) !== "") setOffAlarms();
+  if (findMiscreant(people) !== '') setOffAlarms()
 }
 ```
 
@@ -817,6 +891,7 @@ function alertForMiscreant(people) {
 **Motivation**: Remove duplication by adding a parameter.
 
 **Mechanics**:
+
 1. Select one function
 2. Add parameter for the varying literal
 3. Change body to use the parameter
@@ -825,25 +900,27 @@ function alertForMiscreant(people) {
 6. Remove now-unused functions
 
 **Before**:
+
 ```javascript
 function tenPercentRaise(person) {
-  person.salary = person.salary * 1.10;
+  person.salary = person.salary * 1.1
 }
 
 function fivePercentRaise(person) {
-  person.salary = person.salary * 1.05;
+  person.salary = person.salary * 1.05
 }
 ```
 
 **After**:
+
 ```javascript
 function raise(person, factor) {
-  person.salary = person.salary * (1 + factor);
+  person.salary = person.salary * (1 + factor)
 }
 
 // Usage
-raise(person, 0.10);
-raise(person, 0.05);
+raise(person, 0.1)
+raise(person, 0.05)
 ```
 
 ---
@@ -855,12 +932,14 @@ raise(person, 0.05);
 **Motivation**: Make the behavior explicit through separate functions.
 
 **Mechanics**:
+
 1. Create explicit function for each flag value
 2. Replace each call with appropriate new function
 3. Test after each change
 4. Remove original function
 
 **Before**:
+
 ```javascript
 function bookConcert(customer, isPremium) {
   if (isPremium) {
@@ -870,11 +949,12 @@ function bookConcert(customer, isPremium) {
   }
 }
 
-bookConcert(customer, true);
-bookConcert(customer, false);
+bookConcert(customer, true)
+bookConcert(customer, false)
 ```
 
 **After**:
+
 ```javascript
 function bookPremiumConcert(customer) {
   // premium booking logic
@@ -884,8 +964,8 @@ function bookRegularConcert(customer) {
   // regular booking logic
 }
 
-bookPremiumConcert(customer);
-bookRegularConcert(customer);
+bookPremiumConcert(customer)
+bookRegularConcert(customer)
 ```
 
 ---
@@ -899,6 +979,7 @@ bookRegularConcert(customer);
 **Motivation**: Remove duplication in class hierarchy.
 
 **Mechanics**:
+
 1. Inspect methods to ensure they are identical
 2. Check signatures are the same
 3. Create new method in superclass
@@ -915,6 +996,7 @@ bookRegularConcert(customer);
 **Motivation**: Put method where it's used.
 
 **Mechanics**:
+
 1. Copy method to each subclass that needs it
 2. Remove method from superclass
 3. Test
@@ -930,6 +1012,7 @@ bookRegularConcert(customer);
 **Motivation**: Prefer composition over inheritance when appropriate.
 
 **Mechanics**:
+
 1. Create empty class for delegate
 2. Add field to host class holding delegate
 3. Create constructor for delegate, called from host
@@ -946,6 +1029,7 @@ bookRegularConcert(customer);
 **Motivation**: Split class to maintain single responsibility.
 
 **Mechanics**:
+
 1. Decide how to split responsibilities
 2. Create new class
 3. Move field from original to new class
@@ -956,40 +1040,74 @@ bookRegularConcert(customer);
 8. Decide how to expose new class
 
 **Before**:
+
 ```javascript
 class Person {
-  get name() { return this._name; }
-  set name(arg) { this._name = arg; }
-  get officeAreaCode() { return this._officeAreaCode; }
-  set officeAreaCode(arg) { this._officeAreaCode = arg; }
-  get officeNumber() { return this._officeNumber; }
-  set officeNumber(arg) { this._officeNumber = arg; }
+  get name() {
+    return this._name
+  }
+  set name(arg) {
+    this._name = arg
+  }
+  get officeAreaCode() {
+    return this._officeAreaCode
+  }
+  set officeAreaCode(arg) {
+    this._officeAreaCode = arg
+  }
+  get officeNumber() {
+    return this._officeNumber
+  }
+  set officeNumber(arg) {
+    this._officeNumber = arg
+  }
 
   get telephoneNumber() {
-    return `(${this._officeAreaCode}) ${this._officeNumber}`;
+    return `(${this._officeAreaCode}) ${this._officeNumber}`
   }
 }
 ```
 
 **After**:
+
 ```javascript
 class Person {
   constructor() {
-    this._telephoneNumber = new TelephoneNumber();
+    this._telephoneNumber = new TelephoneNumber()
   }
-  get name() { return this._name; }
-  set name(arg) { this._name = arg; }
-  get telephoneNumber() { return this._telephoneNumber.toString(); }
-  get officeAreaCode() { return this._telephoneNumber.areaCode; }
-  set officeAreaCode(arg) { this._telephoneNumber.areaCode = arg; }
+  get name() {
+    return this._name
+  }
+  set name(arg) {
+    this._name = arg
+  }
+  get telephoneNumber() {
+    return this._telephoneNumber.toString()
+  }
+  get officeAreaCode() {
+    return this._telephoneNumber.areaCode
+  }
+  set officeAreaCode(arg) {
+    this._telephoneNumber.areaCode = arg
+  }
 }
 
 class TelephoneNumber {
-  get areaCode() { return this._areaCode; }
-  set areaCode(arg) { this._areaCode = arg; }
-  get number() { return this._number; }
-  set number(arg) { this._number = arg; }
-  toString() { return `(${this._areaCode}) ${this._number}`; }
+  get areaCode() {
+    return this._areaCode
+  }
+  set areaCode(arg) {
+    this._areaCode = arg
+  }
+  get number() {
+    return this._number
+  }
+  set number(arg) {
+    this._number = arg
+  }
+  toString() {
+    return `(${this._areaCode}) ${this._number}`
+  }
 }
 ```
 
@@ -997,27 +1115,27 @@ class TelephoneNumber {
 
 ## Quick Reference: Smell to Refactoring
 
-| Code Smell | Primary Refactoring | Alternative |
-|------------|-------------------|-------------|
-| Long Method | Extract Method | Replace Temp with Query |
-| Duplicate Code | Extract Method | Pull Up Method |
-| Large Class | Extract Class | Extract Subclass |
-| Long Parameter List | Introduce Parameter Object | Preserve Whole Object |
-| Feature Envy | Move Method | Extract Method + Move |
-| Data Clumps | Extract Class | Introduce Parameter Object |
-| Primitive Obsession | Replace Primitive with Object | Replace Type Code |
-| Switch Statements | Replace Conditional with Polymorphism | Replace Type Code |
-| Temporary Field | Extract Class | Introduce Null Object |
-| Message Chains | Hide Delegate | Extract Method |
-| Middle Man | Remove Middle Man | Inline Method |
-| Divergent Change | Extract Class | Split Phase |
-| Shotgun Surgery | Move Method | Inline Class |
-| Dead Code | Remove Dead Code | - |
-| Speculative Generality | Collapse Hierarchy | Inline Class |
+| Code Smell             | Primary Refactoring                   | Alternative                |
+| ---------------------- | ------------------------------------- | -------------------------- |
+| Long Method            | Extract Method                        | Replace Temp with Query    |
+| Duplicate Code         | Extract Method                        | Pull Up Method             |
+| Large Class            | Extract Class                         | Extract Subclass           |
+| Long Parameter List    | Introduce Parameter Object            | Preserve Whole Object      |
+| Feature Envy           | Move Method                           | Extract Method + Move      |
+| Data Clumps            | Extract Class                         | Introduce Parameter Object |
+| Primitive Obsession    | Replace Primitive with Object         | Replace Type Code          |
+| Switch Statements      | Replace Conditional with Polymorphism | Replace Type Code          |
+| Temporary Field        | Extract Class                         | Introduce Null Object      |
+| Message Chains         | Hide Delegate                         | Extract Method             |
+| Middle Man             | Remove Middle Man                     | Inline Method              |
+| Divergent Change       | Extract Class                         | Split Phase                |
+| Shotgun Surgery        | Move Method                           | Inline Class               |
+| Dead Code              | Remove Dead Code                      | -                          |
+| Speculative Generality | Collapse Hierarchy                    | Inline Class               |
 
 ---
 
 ## Further Reading
 
-- Fowler, M. (2018). *Refactoring: Improving the Design of Existing Code* (2nd ed.)
+- Fowler, M. (2018). _Refactoring: Improving the Design of Existing Code_ (2nd ed.)
 - Online catalog: https://refactoring.com/catalog/

@@ -1,6 +1,7 @@
 # Code Review Checklist
 
 ## Security Checklist
+
 - [ ] No hardcoded credentials or secrets
 - [ ] Input validation on all user inputs
 - [ ] SQL injection prevention (parameterized queries)
@@ -13,6 +14,7 @@
 - [ ] HTTPS enforced
 
 ## Performance Checklist
+
 - [ ] No N+1 queries
 - [ ] Appropriate use of indexes
 - [ ] Caching implemented where beneficial
@@ -25,6 +27,7 @@
 - [ ] Memory leaks prevented
 
 ## Quality Checklist
+
 - [ ] Functions < 50 lines
 - [ ] Clear variable naming
 - [ ] No duplicate code
@@ -37,6 +40,7 @@
 - [ ] Self-documenting code
 
 ## Testing Checklist
+
 - [ ] Unit tests written
 - [ ] Edge cases covered
 - [ ] Error scenarios tested

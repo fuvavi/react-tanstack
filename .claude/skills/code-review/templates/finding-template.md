@@ -7,12 +7,14 @@ Use this template when documenting each issue found during code review.
 ## Issue: [TITLE]
 
 ### Severity
+
 - [ ] Critical (blocks deployment)
 - [ ] High (should fix before merge)
 - [ ] Medium (should fix soon)
 - [ ] Low (nice to have)
 
 ### Category
+
 - [ ] Security
 - [ ] Performance
 - [ ] Code Quality
@@ -22,6 +24,7 @@ Use this template when documenting each issue found during code review.
 - [ ] Documentation
 
 ### Location
+
 **File:** `src/components/UserCard.tsx`
 
 **Lines:** 45-52
@@ -44,31 +47,31 @@ Use this template when documenting each issue found during code review.
 
 ```typescript
 // Shows the N+1 query problem
-const users = fetchUsers();
-users.forEach(user => {
-  const posts = fetchUserPosts(user.id); // Query per user!
-  renderUserPosts(posts);
-});
+const users = fetchUsers()
+users.forEach((user) => {
+  const posts = fetchUserPosts(user.id) // Query per user!
+  renderUserPosts(posts)
+})
 ```
 
 #### Suggested Fix
 
 ```typescript
 // Optimized with JOIN query
-const usersWithPosts = fetchUsersWithPosts();
+const usersWithPosts = fetchUsersWithPosts()
 usersWithPosts.forEach(({ user, posts }) => {
-  renderUserPosts(posts);
-});
+  renderUserPosts(posts)
+})
 ```
 
 ### Impact Analysis
 
-| Aspect | Impact | Severity |
-|--------|--------|----------|
-| Performance | 100+ queries for 20 users | High |
-| User Experience | Slow page load | High |
-| Scalability | Breaks at scale | Critical |
-| Maintainability | Hard to debug | Medium |
+| Aspect          | Impact                    | Severity |
+| --------------- | ------------------------- | -------- |
+| Performance     | 100+ queries for 20 users | High     |
+| User Experience | Slow page load            | High     |
+| Scalability     | Breaks at scale           | Critical |
+| Maintainability | Hard to debug             | Medium   |
 
 ### Related Issues
 
@@ -89,7 +92,7 @@ usersWithPosts.forEach(({ user, posts }) => {
 
 ### Author Response (for feedback)
 
-*To be filled by the code author:*
+_To be filled by the code author:_
 
 - [ ] Fix implemented in commit: `abc123`
 - [ ] Fix status: Complete / In Progress / Needs Discussion

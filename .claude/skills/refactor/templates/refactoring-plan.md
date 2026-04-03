@@ -6,29 +6,32 @@ Use this template to document and track your refactoring effort.
 
 ## Project Information
 
-| Field | Value |
-|-------|-------|
-| **Project/Module** | [Project name] |
-| **Target Files** | [List of files to refactor] |
-| **Date Created** | [Date] |
-| **Author** | [Name] |
-| **Status** | Draft / In Review / Approved / In Progress / Completed |
+| Field              | Value                                                  |
+| ------------------ | ------------------------------------------------------ |
+| **Project/Module** | [Project name]                                         |
+| **Target Files**   | [List of files to refactor]                            |
+| **Date Created**   | [Date]                                                 |
+| **Author**         | [Name]                                                 |
+| **Status**         | Draft / In Review / Approved / In Progress / Completed |
 
 ---
 
 ## Executive Summary
 
 ### Goals
+
 - [ ] [Primary goal: e.g., Improve readability of payment processing]
 - [ ] [Secondary goal: e.g., Reduce code duplication]
 - [ ] [Tertiary goal: e.g., Improve testability]
 
 ### Constraints
+
 - [ ] [Constraint 1: e.g., Cannot change public API]
 - [ ] [Constraint 2: e.g., Must maintain backward compatibility]
 - [ ] [Constraint 3: e.g., No changes to database schema]
 
 ### Risk Level
+
 - [ ] Low - Minor changes, well-tested code
 - [ ] Medium - Moderate changes, some risk
 - [ ] High - Significant changes, careful attention needed
@@ -39,13 +42,14 @@ Use this template to document and track your refactoring effort.
 
 ### Test Coverage Assessment
 
-| Metric | Current | Target | Status |
-|--------|---------|--------|--------|
-| Unit Test Coverage | __%  | ≥80% | |
-| Integration Tests | Yes/No | Yes | |
-| All Tests Passing | Yes/No | Yes | |
+| Metric             | Current | Target | Status |
+| ------------------ | ------- | ------ | ------ |
+| Unit Test Coverage | \_\_%   | ≥80%   |        |
+| Integration Tests  | Yes/No  | Yes    |        |
+| All Tests Passing  | Yes/No  | Yes    |        |
 
 ### Required Before Starting
+
 - [ ] All tests passing
 - [ ] Code reviewed and understood
 - [ ] Backup/version control in place
@@ -57,11 +61,11 @@ Use this template to document and track your refactoring effort.
 
 ### Summary
 
-| # | Smell | Location | Severity | Priority |
-|---|-------|----------|----------|----------|
-| 1 | [e.g., Long Method] | [file:line] | High | P1 |
-| 2 | [e.g., Duplicate Code] | [file:line] | Medium | P2 |
-| 3 | [e.g., Feature Envy] | [file:line] | Low | P3 |
+| #   | Smell                  | Location    | Severity | Priority |
+| --- | ---------------------- | ----------- | -------- | -------- |
+| 1   | [e.g., Long Method]    | [file:line] | High     | P1       |
+| 2   | [e.g., Duplicate Code] | [file:line] | Medium   | P2       |
+| 3   | [e.g., Feature Envy]   | [file:line] | Low      | P3       |
 
 ### Detailed Analysis
 
@@ -72,6 +76,7 @@ Use this template to document and track your refactoring effort.
 **Description**: [Detailed description of the problem]
 
 **Impact**:
+
 - [Impact 1]
 - [Impact 2]
 
@@ -89,11 +94,11 @@ Use this template to document and track your refactoring effort.
 
 **User Approval Required**: Yes / No
 
-| # | Task | File | Refactoring | Status |
-|---|------|------|-------------|--------|
-| A1 | Rename variable `x` to `userCount` | utils.js:15 | Rename Variable | [ ] |
-| A2 | Remove unused `oldHandler()` | api.js:89 | Remove Dead Code | [ ] |
-| A3 | Extract duplicate validation | form.js:23,67 | Extract Method | [ ] |
+| #   | Task                               | File          | Refactoring      | Status |
+| --- | ---------------------------------- | ------------- | ---------------- | ------ |
+| A1  | Rename variable `x` to `userCount` | utils.js:15   | Rename Variable  | [ ]    |
+| A2  | Remove unused `oldHandler()`       | api.js:89     | Remove Dead Code | [ ]    |
+| A3  | Extract duplicate validation       | form.js:23,67 | Extract Method   | [ ]    |
 
 **Rollback Plan**: Revert commits A1-A3
 
@@ -109,11 +114,11 @@ Use this template to document and track your refactoring effort.
 
 **Dependencies**: Phase A must be complete
 
-| # | Task | File | Refactoring | Status |
-|---|------|------|-------------|--------|
-| B1 | Extract `calculatePrice()` from long method | order.js:45 | Extract Method | [ ] |
-| B2 | Introduce `OrderDetails` parameter object | order.js:12 | Introduce Parameter Object | [ ] |
-| B3 | Move `formatAddress()` to Address class | customer.js:78 | Move Method | [ ] |
+| #   | Task                                        | File           | Refactoring                | Status |
+| --- | ------------------------------------------- | -------------- | -------------------------- | ------ |
+| B1  | Extract `calculatePrice()` from long method | order.js:45    | Extract Method             | [ ]    |
+| B2  | Introduce `OrderDetails` parameter object   | order.js:12    | Introduce Parameter Object | [ ]    |
+| B3  | Move `formatAddress()` to Address class     | customer.js:78 | Move Method                | [ ]    |
 
 **Rollback Plan**: Revert to post-Phase-A commit
 
@@ -129,10 +134,10 @@ Use this template to document and track your refactoring effort.
 
 **Dependencies**: Phases A and B must be complete
 
-| # | Task | File | Refactoring | Status |
-|---|------|------|-------------|--------|
-| C1 | Replace price switch with polymorphism | pricing.js:30 | Replace Conditional with Polymorphism | [ ] |
-| C2 | Extract `NotificationService` class | user.js:100 | Extract Class | [ ] |
+| #   | Task                                   | File          | Refactoring                           | Status |
+| --- | -------------------------------------- | ------------- | ------------------------------------- | ------ |
+| C1  | Replace price switch with polymorphism | pricing.js:30 | Replace Conditional with Polymorphism | [ ]    |
+| C2  | Extract `NotificationService` class    | user.js:100   | Extract Class                         | [ ]    |
 
 **Rollback Plan**: Revert to post-Phase-B commit
 
@@ -151,11 +156,13 @@ Use this template to document and track your refactoring effort.
 #### Context
 
 **Before** (Current State):
+
 ```javascript
 // Paste current code here
 ```
 
 **After** (Expected State):
+
 ```javascript
 // Paste expected code here
 ```
@@ -182,6 +189,7 @@ Use this template to document and track your refactoring effort.
 - [ ] No new warnings
 
 #### Commit Message
+
 ```
 refactor: [Describe the refactoring]
 ```
@@ -192,17 +200,17 @@ refactor: [Describe the refactoring]
 
 ### Phase Status
 
-| Phase | Status | Started | Completed | Tests Passing |
-|-------|--------|---------|-----------|---------------|
-| A | Not Started / In Progress / Done | | | |
-| B | Not Started / In Progress / Done | | | |
-| C | Not Started / In Progress / Done | | | |
+| Phase | Status                           | Started | Completed | Tests Passing |
+| ----- | -------------------------------- | ------- | --------- | ------------- |
+| A     | Not Started / In Progress / Done |         |           |               |
+| B     | Not Started / In Progress / Done |         |           |               |
+| C     | Not Started / In Progress / Done |         |           |               |
 
 ### Issues Encountered
 
-| # | Issue | Resolution | Status |
-|---|-------|------------|--------|
-| 1 | [Description] | [How resolved] | Open / Resolved |
+| #   | Issue         | Resolution     | Status          |
+| --- | ------------- | -------------- | --------------- |
+| 1   | [Description] | [How resolved] | Open / Resolved |
 
 ---
 
@@ -210,23 +218,23 @@ refactor: [Describe the refactoring]
 
 ### Before Refactoring
 
-| Metric | File 1 | File 2 | Total |
-|--------|--------|--------|-------|
-| Lines of Code | | | |
-| Cyclomatic Complexity | | | |
-| Maintainability Index | | | |
-| Number of Methods | | | |
-| Avg Method Length | | | |
+| Metric                | File 1 | File 2 | Total |
+| --------------------- | ------ | ------ | ----- |
+| Lines of Code         |        |        |       |
+| Cyclomatic Complexity |        |        |       |
+| Maintainability Index |        |        |       |
+| Number of Methods     |        |        |       |
+| Avg Method Length     |        |        |       |
 
 ### After Refactoring
 
-| Metric | File 1 | File 2 | Total | Change |
-|--------|--------|--------|-------|--------|
-| Lines of Code | | | | |
-| Cyclomatic Complexity | | | | |
-| Maintainability Index | | | | |
-| Number of Methods | | | | |
-| Avg Method Length | | | | |
+| Metric                | File 1 | File 2 | Total | Change |
+| --------------------- | ------ | ------ | ----- | ------ |
+| Lines of Code         |        |        |       |        |
+| Cyclomatic Complexity |        |        |       |        |
+| Maintainability Index |        |        |       |        |
+| Number of Methods     |        |        |       |        |
+| Avg Method Length     |        |        |       |        |
 
 ---
 
@@ -246,14 +254,17 @@ refactor: [Describe the refactoring]
 ## Lessons Learned
 
 ### What Went Well
+
 - [Item 1]
 - [Item 2]
 
 ### What Could Be Improved
+
 - [Item 1]
 - [Item 2]
 
 ### Recommendations for Future
+
 - [Item 1]
 - [Item 2]
 
@@ -261,24 +272,27 @@ refactor: [Describe the refactoring]
 
 ## Approvals
 
-| Role | Name | Date | Signature |
-|------|------|------|-----------|
-| Plan Author | | | |
-| Technical Lead | | | |
-| Product Owner | | | |
+| Role           | Name | Date | Signature |
+| -------------- | ---- | ---- | --------- |
+| Plan Author    |      |      |           |
+| Technical Lead |      |      |           |
+| Product Owner  |      |      |           |
 
 ---
 
 ## Appendix
 
 ### A. Related Documentation
+
 - [Link to relevant docs]
 
 ### B. Reference Materials
+
 - [Link to code smells catalog]
 - [Link to refactoring catalog]
 
 ### C. Tools Used
+
 - [Testing framework]
 - [Linting tools]
 - [Complexity analysis tools]

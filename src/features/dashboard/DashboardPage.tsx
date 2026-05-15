@@ -120,9 +120,7 @@ export function DashboardPage() {
                       <span className="font-medium">{item.user}</span>
                       <span className="text-muted-foreground"> — {item.action}</span>
                     </div>
-                    <span className="shrink-0 text-xs text-muted-foreground">
-                      {item.timestamp}
-                    </span>
+                    <span className="shrink-0 text-xs text-muted-foreground">{item.timestamp}</span>
                   </li>
                 ))}
               </ul>

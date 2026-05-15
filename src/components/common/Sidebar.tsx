@@ -4,9 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { cn } from '@/utils'
 import { useUIStore } from '@/stores/uiStore'
 
-const navItems = [
-  { icon: LayoutDashboard, labelKey: 'nav.dashboard', to: '/dashboard' as const },
-]
+const navItems = [{ icon: LayoutDashboard, labelKey: 'nav.dashboard', to: '/dashboard' as const }]
 
 export function Sidebar() {
   const { t } = useTranslation()

@@ -4,20 +4,20 @@ A production-ready React boilerplate with modern technologies.
 
 ## Tech Stack
 
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| React | 19 | UI Framework |
-| TypeScript | 5.x | Type safety |
-| Vite | 6 | Build tool |
-| TanStack Router | v1 | File-based routing |
-| TanStack Query | v5 | Server state management |
-| Zustand | v5 | Client state management |
-| React Hook Form | v7 | Form handling |
-| Zod | v3 | Schema validation |
-| i18next | v24 | Internationalization (EN/VI) |
-| Tailwind CSS | v4 | Styling |
-| shadcn/ui | - | UI Components |
-| Axios | v1 | HTTP client |
+| Technology      | Version | Purpose                      |
+| --------------- | ------- | ---------------------------- |
+| React           | 19      | UI Framework                 |
+| TypeScript      | 5.x     | Type safety                  |
+| Vite            | 6       | Build tool                   |
+| TanStack Router | v1      | File-based routing           |
+| TanStack Query  | v5      | Server state management      |
+| Zustand         | v5      | Client state management      |
+| React Hook Form | v7      | Form handling                |
+| Zod             | v3      | Schema validation            |
+| i18next         | v24     | Internationalization (EN/VI) |
+| Tailwind CSS    | v4      | Styling                      |
+| shadcn/ui       | -       | UI Components                |
+| Axios           | v1      | HTTP client                  |
 
 ## Installation
 
@@ -73,6 +73,7 @@ src/
 ## Features
 
 ### Authentication
+
 - Login form with React Hook Form + Zod validation
 - JWT token automatically attached to every request
 - Automatic token refresh on expiry (401 interceptor)
@@ -80,17 +81,20 @@ src/
 - Token persisted to localStorage via Zustand persist
 
 ### UI
+
 - Dark mode / Light mode / System (saved to localStorage)
 - Collapsible sidebar
 - Responsive layout
 
 ### Internationalization
+
 - English and Vietnamese support
 - Language switcher in header
 - Automatic browser language detection
 - Language preference saved to localStorage
 
 ### Dashboard
+
 - Stats display with useQuery
 - Recent activity list
 - Placeholder data when API is not available

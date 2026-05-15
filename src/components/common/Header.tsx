@@ -1,5 +1,6 @@
 import { Menu, Moon, Sun, Monitor, Globe, LogOut, User } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from '@tanstack/react-router'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -17,6 +18,11 @@ export function Header() {
   const { t, i18n } = useTranslation()
   const { user, logout } = useAuthStore()
   const { theme, setTheme, toggleSidebar, setLanguage } = useUIStore()
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    logout()
+    navigate({ to: '/login' })
+  }
 
   const handleLanguageChange = (lang: Language) => {
     setLanguage(lang)
@@ -92,7 +98,7 @@ export function Header() {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>{user?.name ?? user?.email}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={logout}>
+          <DropdownMenuItem onClick={handleLogout}>
             <LogOut className="mr-2 h-4 w-4" />
             {t('auth.logout')}
           </DropdownMenuItem>

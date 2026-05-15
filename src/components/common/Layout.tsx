@@ -11,12 +11,7 @@ export function Layout() {
     <div className="min-h-screen bg-background">
       <Header />
       <Sidebar />
-      <main
-        className={cn(
-          'transition-all duration-300 pt-14',
-          sidebarOpen ? 'ml-56' : 'ml-0',
-        )}
-      >
+      <main className={cn('transition-all duration-300 pt-14', sidebarOpen ? 'ml-56' : 'ml-0')}>
         <div className="container mx-auto p-6">
           <Outlet />
         </div>
